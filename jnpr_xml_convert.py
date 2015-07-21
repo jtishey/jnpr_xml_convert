@@ -1,10 +1,24 @@
 #!/usr/bin/env python
+'''
+jnpr_xml_convert.py
+Attempts a best-effort, text scrape conversion from
+Juniper xml config to "set" commands.
+Useage:  python jnpr_xml_convert.py -f <FILENAME.xml>
+    https://github.com/jtishey/jnpr_xml_convert
+'''
 import re, argparse
 
+# Initial start string:
 level = ['set']
+# Terms that need to have double quotes in the set commands:
 needs_quotes = ['description', 'message']
+# Terms that should not be included in the set commands:
 blacklist = ['name', 'instance', 'contents', 'rd-type']
+# I think this was terms that should not be included in the
+# set commands only if the previous term was a specific value:
 blacklist_combine = ['vrf-targetcommunity', 'interfacesinterface','any/any']
+
+# Initalize a bunch of tracking and loop variables:
 cur_lvl, mod, mod_loop = 0, 0, 0
 added, un_mod = False, False
 source_file, out_file = '', ''
@@ -19,9 +33,10 @@ def arguments():
 
 source_file = arguments()
 
-f1 = open(source_file,"r")
-lines = f1.readlines()
+with open(source_file, "r") as f1:
+    lines = f1.readlines()
 
+#  Barely got this mess working, not sure how to comment it  =D
 for line in lines:
     line = line.rstrip()
     line = re.split("[<>]",line)
