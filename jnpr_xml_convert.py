@@ -6,9 +6,8 @@ Juniper xml config to "set" commands.
 Useage:  python jnpr_xml_convert.py -f <FILENAME.xml>
     https://github.com/jtishey/jnpr_xml_convert
 '''
-import re, argparse
+import re, argparse, sys
 
-# Initial start string:
 level = ['set']
 # Terms that need to have double quotes in the set commands:
 needs_quotes = ['description', 'message']
@@ -23,20 +22,11 @@ cur_lvl, mod, mod_loop = 0, 0, 0
 added, un_mod = False, False
 source_file, out_file = '', ''
 
-def arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--file", help="source XML file to convert", metavar="FILE", required=True)
-    args = vars(parser.parse_args())
-    if args['file']:
-        source_file = args['file']
-    return source_file
-
-source_file = arguments()
+source_file = str(sys.argv[1])
 
 with open(source_file, "r") as f1:
     lines = f1.readlines()
 
-#  Barely got this mess working, not sure how to comment it  =D
 for line in lines:
     line = line.rstrip()
     line = re.split("[<>]",line)
