@@ -1,0 +1,31 @@
+ set version 12.1X47-D20.7
+ set system host-name vSRX1
+ set system root-authentication encrypted-password $1$mR6SjvGO$haDLanXXnDz6CQeqWaIa6.
+ set system login user admin uid 2000
+ set system login user admin class super-user
+ set system login user admin authentication encrypted-password $1$BBNKjE2V$Tz7ngWe61.ku0ZLeW5GKs1
+ set system login password minimum-changes 0
+ set system services ssh
+ set system services telnet
+ set system services netconf ssh
+ set system syslog user * any emergency
+ set system syslog file messages any any
+ set system syslog file messages authorization info
+ set system license autoupdate url https://ae1.juniper.net/junos/key_retrieval
+ set interfaces ge-0/0/0 unit 0 family inet address 10.1.2.1/24
+ set interfaces ge-0/0/0 unit 0 family inet6 address 2002:1:2::1/64
+ set interfaces ge-0/0/1 unit 0 family inet address 10.1.10.1/24
+ set interfaces ge-0/0/1 unit 0 family inet6 address 2002:1:10::1/64
+ set interfaces ge-0/0/5 description "MGMT - DONT CHANGE"
+ set interfaces ge-0/0/5 unit 0 family inet address 172.16.212.21/26
+ set interfaces lo0 unit 0 family inet address 1.1.1.1/32
+ set interfaces lo0 unit 0 family inet6 address 2002::1/128
+ set routing-options router-id 1.1.1.1
+ set security forwarding-options family inet6 mode packet-based
+ set security forwarding-options family mpls mode packet-based
+ set routing-instances vrf-mgmt-network instance-type vrf
+ set routing-instances vrf-mgmt-network interface ge-0/0/5.0
+ set routing-instances vrf-mgmt-network route-distinguisher 172.16.212.1:1
+ set routing-instances vrf-mgmt-network vrf-target target:172.16.212.1:1
+ set routing-instances vrf-mgmt-network no-vrf-advertise
+ set routing-instances vrf-mgmt-network routing-options static route 0.0.0.0/0 next-hop 172.16.212.1
