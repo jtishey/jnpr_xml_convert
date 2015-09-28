@@ -8,7 +8,3 @@ idea was to parse the file as XML, but the tag/text
 relationships being a little funky made it difficult.  As
 it stands, parsing as text is not a great solution either.
 
-The coding is pretty awful and has many workarounds,
-so don't expect great things.
-
-(Feel free to make it better)
