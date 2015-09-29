@@ -3,18 +3,18 @@
 jnpr_xml_convert.py
 Attempts a best-effort, text scrape conversion from
 Juniper xml config to "set" commands.
-Useage:  python jnpr_xml_convert.py -f <FILENAME.xml>
+Useage:  python jnpr_xml_convert.py <FILENAME.xml>
     https://github.com/jtishey/jnpr_xml_convert
 '''
-import re, argparse, sys
+import re, sys
 
 level = ['set']
 # Terms that need to have double quotes in the set commands:
 needs_quotes = ['description', 'message']
 # Terms that should not be included in the set commands:
 blacklist = ['name', 'instance', 'contents', 'rd-type']
-# I think this was terms that should not be included in the
-# set commands only if the previous term was a specific value:
+# Terms that should not be included in the set commands
+# when the previous term is a specific value:
 blacklist_combine = ['vrf-targetcommunity', 'interfacesinterface','any/any']
 
 # Initalize a bunch of tracking and loop variables:
