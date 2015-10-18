@@ -15,7 +15,7 @@ needs_quotes = ['description', 'message']
 blacklist = ['name', 'instance', 'contents', 'rd-type']
 # Terms that should not be included in the set commands
 # when the previous term is a specific value:
-blacklist_combine = ['vrf-targetcommunity', 'interfacesinterface','any/any']
+blacklist_combine = ['vrf-targetcommunity', 'interfacesinterface','any/any', 'redundant-parentparent']
 
 # Initalize a bunch of tracking and loop variables:
 cur_lvl, mod, mod_loop = 0, 0, 0
